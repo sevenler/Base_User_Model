@@ -16,7 +16,7 @@ class User(object):
 
     class LoginEmailDoesNotExist(Exception):
         def __init__(self, email):
-            self.__message = "login email %s is not exist" % email
+            self.__message = "login email \'%s\' is not exist" % email
         def __str__(self):
             return repr(self.__message)
     
@@ -28,13 +28,13 @@ class User(object):
     
     class EmailExistAlready(Exception):
         def __init__(self, email):
-            self.__message = "email %s is exist" % email
+            self.__message = "email \'%s\' is exist" % email
         def __str__(self):
             return repr(self.__message)
     
     class EmailDoesNotExist(Exception):
         def __init__(self, email):
-            self.__message = "email %s does not exist" % email
+            self.__message = "email \'%s\' does not exist" % email
         def __str__(self):
             return repr(self.__message)
     
@@ -76,6 +76,23 @@ class User(object):
         self.__ensure_user_profile_obj()
         return self.user_profile_obj;
     
+    def read(self):
+        self.__ensure_user_obj()
+        self.__ensure_user_profile_obj()
+        
+        _basic_info = {}
+        _basic_info['email'] = self.user_obj.email;
+        _basic_info['username'] = self.user_obj.username;
+        
+        _basic_info['nickname'] = self.user_profile_obj.nickname;
+        _basic_info['location'] = self.user_profile_obj.location;
+        _basic_info['city'] = self.user_profile_obj.city;
+        _basic_info['bio'] = self.user_profile_obj.bio;
+        _basic_info['gender'] = self.user_profile_obj.gender;
+        _basic_info['website'] = self.user_profile_obj.website;
+        
+        return _basic_info
+    
     def check_auth(self, password):
         self.__ensure_user_obj()
         if authenticate(username = self.get_username(), password = password):
@@ -116,6 +133,10 @@ class User(object):
                 self.user_profile_obj.gender = gender.strip()
             self.user_profile_obj.save()
         
+    def delete(self):
+        self.__ensure_user_obj()
+        self.user_obj.delete()
+        
     @staticmethod
     def nickname_exist(nickname):
         try:
@@ -145,15 +166,15 @@ class User(object):
         return False
     
     @classmethod
-    def create(cls, email, password, _username = ''):
+    def create(cls, email, password, username = ''):
         if User.email_exist(email):
             raise User.EmailExistAlready(email) 
 
         try:
-            _user = AuthUser.objects.create(username = _username, email = email)
+            _user = AuthUser.objects.create(username = username, email = email)
             _user.set_password(password)
             _user.save()
             _inst = cls(_user.id)
             return _inst
         except IntegrityError:
-            raise User.UsernameExistAlready(_username)
+            raise User.UsernameExistAlready(username)

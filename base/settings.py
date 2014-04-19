@@ -18,7 +18,7 @@ DATABASES = {
         'NAME': 'serialing',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': 'trymybest2013',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',                       # Set to empty string for default.
         'OPTIONS': {

@@ -1,6 +1,7 @@
-from django.conf.urls import patterns
+from django.conf.urls import patterns, url
 
-urlpatterns = patterns('',
+
+urlpatterns = patterns('mobile.views',
     # Examples:
     # url(r'^$', 'base.views.home', name='home'),
     # url(r'^base/', include('base.foo.urls')),
@@ -9,5 +10,6 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-#     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', 'login'),
+    url(r'^register/$', 'register'),
 )

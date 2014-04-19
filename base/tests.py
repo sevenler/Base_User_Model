@@ -3,7 +3,6 @@ from django.test import TestCase
 
 from base.user import User
 
-
 class UserTest(TestCase):
     
     @staticmethod
@@ -11,9 +10,9 @@ class UserTest(TestCase):
         try:
             do()
         except Exception, e:
-            if (type(e) !=  exception_type):
+            if (type(e) != exception_type):
                 print type(e)
-                assert (type(e) ==  exception_type)
+                assert (type(e) == exception_type)
     
     @staticmethod            
     def print_user(user):
@@ -32,7 +31,7 @@ class UserTest(TestCase):
             
     def test_base_user_profile(self):
         user = User.login('johnnyxyzw@gmail.com', '123456')
-        user.set_profile('johnny', location='北京', city = '朝阳', gender='M', bio='我是你大爷', website='www.baidu.com');
+        user.set_profile('johnny', location='北京', city='朝阳', gender='M', bio='我是你大爷', website='www.baidu.com');
         UserTest.print_user(user)
         
         us = User.create('johnnyxyzw2@gmail.com', '123456', 'johnny1')
