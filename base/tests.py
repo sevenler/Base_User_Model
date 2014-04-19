@@ -15,6 +15,10 @@ class UserTest(TestCase):
                 print type(e)
                 assert (type(e) ==  exception_type)
     
+    @staticmethod            
+    def print_user(user):
+        print user.get_username(), user.get_email(), user.get_profile().nickname, user.get_profile().location, user.get_profile().city, user.get_profile().city, user.get_profile().bio, user.get_profile().website;
+    
     def setUp(self):
         User.create('johnnyxyzw@gmail.com', '123456', 'johnny');
 
@@ -29,10 +33,12 @@ class UserTest(TestCase):
     def test_base_user_profile(self):
         user = User.login('johnnyxyzw@gmail.com', '123456')
         user.set_profile('johnny', location='北京', city = '朝阳', gender='M', bio='我是你大爷', website='www.baidu.com');
-        print user.get_profile().nickname, user.get_profile().location, user.get_profile().city, user.get_profile().city, user.get_profile().bio, user.get_profile().website
+        UserTest.print_user(user)
         
         us = User.create('johnnyxyzw2@gmail.com', '123456', 'johnny1')
         UserTest.assert_exception((lambda:us.set_profile('johnny')), User.NicknameExistAlready)
+        us.set_profile('johnny2');
+        UserTest.print_user(us)
         
 
 
