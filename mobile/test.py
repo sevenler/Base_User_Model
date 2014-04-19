@@ -51,6 +51,10 @@ class MobileTest(TestCase):
                                      'api_key':'secret'});
         assert (json.loads(response.content)['session'] != None)
         
+        session = json.loads(response.content)['session'];
+        response = self.client.post('/mobile/v1/logout/', {'session': session});
+        print response;
+        
         response = self.client.post('/mobile/v1/login/',
                                     {'email':'johnny1@gmail.com',
                                      'password':'123456',
@@ -61,4 +65,4 @@ class MobileTest(TestCase):
                                     {'email':'johnny@gmail.com',
                                      'password':'1234565',
                                      'api_key':'secret'});
-        assert (json.loads(response.content)['type'] == 'password')          
+        assert (json.loads(response.content)['type'] == 'password')

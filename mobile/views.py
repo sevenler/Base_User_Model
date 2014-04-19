@@ -117,3 +117,12 @@ def register(request):
                 status = 409
             )
         return SuccessJsonResponse(_data)
+    
+def logout(request):
+    _req_uri = request.get_full_path()
+    if request.method == "POST":
+        _session = request.POST.get('session', None)
+        _session_obj = Session_Key.objects.get(session_key = _session)
+        _session_obj.delete()
+        
+        return SuccessJsonResponse({ 'success' : '1' }) 

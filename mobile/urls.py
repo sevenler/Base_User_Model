@@ -12,4 +12,5 @@ urlpatterns = patterns('mobile.views',
     # Uncomment the next line to enable the admin:
     url(r'^login/$', 'login'),
     url(r'^register/$', 'register'),
+    url(r'^logout/$', 'logout'),
 )
