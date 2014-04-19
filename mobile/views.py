@@ -2,15 +2,12 @@ from base.user import User
 from mobile.http import SuccessJsonResponse, ErrorJsonResponse
 from mobile.models import Session_Key
 
-
 def login(request):
     if request.method == "POST":
         _email = request.POST.get('email', None)
         _password = request.POST.get('password', None)
         _api_key = request.POST.get('api_key', None)
         
-        print _email, _password, _api_key
-         
     try:
         _user = User.login(
             email = _email, 
@@ -23,7 +20,7 @@ def login(request):
             api_key = _api_key
         )
         _data = {
-            'user' : _user.read(_user.user_id),
+            'user' : _user.read(),
             'session' : _session.session_key
         }
         return SuccessJsonResponse(_data)

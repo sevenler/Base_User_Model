@@ -7,8 +7,6 @@ class MobileTest(TestCase):
     
     def setUp(self):
         self.client = Client() 
-    
-    def test_mobile_login(self):
         response = self.client.post('/mobile/v1/register/',
                                     {'email':'johnny@gmail.com',
                                      'password':'123456',
@@ -16,7 +14,8 @@ class MobileTest(TestCase):
                                      'nickname':'johnny',
                                      'api_key':'secret'});
         assert (json.loads(response.content)['session'] != None)
-        
+    
+    def test_mobile_register(self):
         #email重复
         response = self.client.post('/mobile/v1/register/',
                                     {'email':'johnny@gmail.com',
@@ -43,3 +42,23 @@ class MobileTest(TestCase):
                                      'nickname':'johnny',
                                      'api_key':'secret'});
         assert (json.loads(response.content)['type'] == 'nickname')
+        
+    
+    def test_mobile_login(self):
+        response = self.client.post('/mobile/v1/login/',
+                                    {'email':'johnny@gmail.com',
+                                     'password':'123456',
+                                     'api_key':'secret'});
+        assert (json.loads(response.content)['session'] != None)
+        
+        response = self.client.post('/mobile/v1/login/',
+                                    {'email':'johnny1@gmail.com',
+                                     'password':'123456',
+                                     'api_key':'secret'});
+        assert (json.loads(response.content)['type'] == 'email')
+        
+        response = self.client.post('/mobile/v1/login/',
+                                    {'email':'johnny@gmail.com',
+                                     'password':'1234565',
+                                     'api_key':'secret'});
+        assert (json.loads(response.content)['type'] == 'password')          
