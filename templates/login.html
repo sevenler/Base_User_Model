@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="well-large" style="background-color: #d9edf7">
+        <form class="form-horizontal" ation="{% url 'web_login' %}" method=post>
+			 {% csrf_token %}  
+			 
+			 
+			 {% for field in forms %}
+			 
+			 	<label class="control-label">{{ field.label_tag }}</label>
+			 	<div class="control-group">
+                    {{ field }} {{ field.errors }}
+                </div>
+                 
+             {% endfor %}
+                
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit"  class="btn btn-primary">登陆</button>
+                    <button type="reset" class="btn btn-danger">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

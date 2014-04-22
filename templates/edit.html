@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="well-large" style="background-color: #d9edf7" xmlns="http://www.w3.org/1999/html">
+        <form class="form-horizontal" ation="{{ url_for('editinfo') }}" method=post>
+
+            <div class="control-group warning">
+                <label class="control-label" for="inputname">姓名：</label>
+
+                <div class="controls warning">
+                    <input type="text" id="inputname" placeholder="{{ user.Username }}" name="username">
+                </div>
+            </div>
+
+            <div class="control-group warning">
+                <label class="control-label " for="inputschool">学校：</label>
+
+                <div class="controls warning">
+                    <input type="text" id="inputschool" placeholder=" {{ user.School }}" name="school">
+                </div>
+            </div>
+
+            <div class="control-group warning">
+                <label class="control-label" for="age">年龄：</label>
+
+                <div class="controls warning">
+                    <input type="text" id="age" placeholder="{{ user.Age }}" name="age"
+                </div>
+            </div>
+            </br>
+            <div class="control-group warning">
+                <label class="control-label" for="blog">博客：</label>
+
+                <div class="controls">
+                    <input type="text" id="blog" placeholder="{{ user.Blog }}" name="blog"
+                </div>
+            </div>
+            <br>
+            <div class="control-group warning">
+                <label class="control-label" for="inputname">自我介绍：</label>
+
+                <div class="controls">
+                    <textarea class="span6" name="intro" rows="3" cols="40"
+                              placeholder="{{ user.Introduction }}"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit"  class="btn btn-primary">修改</button>
+                    <button type="reset" class="btn btn-danger">清空</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

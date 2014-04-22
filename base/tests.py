@@ -3,6 +3,7 @@ from django.test import TestCase
 
 from base.user import User
 
+
 class UserTest(TestCase):
     
     @staticmethod
@@ -38,6 +39,4 @@ class UserTest(TestCase):
         UserTest.assert_exception((lambda:us.set_profile('johnny')), User.NicknameExistAlready)
         us.set_profile('johnny2');
         UserTest.print_user(us)
-        
-
 

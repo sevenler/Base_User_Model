@@ -72,6 +72,10 @@ class User(object):
         self.__ensure_user_obj()
         return self.user_obj.email
     
+    def get_id(self):
+        self.__ensure_user_obj()
+        return self.user_obj.id
+    
     def get_profile(self):
         self.__ensure_user_profile_obj()
         return self.user_profile_obj;
@@ -178,3 +182,23 @@ class User(object):
             return _inst
         except IntegrityError:
             raise User.UsernameExistAlready(username)
+        
+    @staticmethod
+    def get_user_id_by_email(email):
+        try:
+            _user_obj = AuthUser.objects.get(email=email)
+            return _user_obj.id
+        except Exception: 
+            pass
+        return None
+    
+    @classmethod
+    def get_user_by_id(cls, uid):
+        try:
+            _user_obj = AuthUser.objects.get(id=uid)
+            _inst = cls(_user_obj.id)
+            _inst.user_obj = _user_obj
+            return _inst
+        except Exception: 
+            pass
+        return None

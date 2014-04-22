@@ -1,5 +1,6 @@
 # Django settings for base project.
 #coding:utf-8
+import os
 import sys
 
 
@@ -18,7 +19,7 @@ DATABASES = {
         'NAME': 'serialing',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'trymybest2013',
         'HOST': 'localhost',
         'PORT': '',                       # Set to empty string for default.
         'OPTIONS': {
@@ -59,6 +60,8 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+BASE_ROOT = os.path.join(os.path.dirname(__file__), '../')
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = ''
@@ -83,6 +86,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_ROOT, 'static/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -122,6 +126,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_ROOT, 'templates').replace('\\','/'),
 )
 
 INSTALLED_APPS = (
